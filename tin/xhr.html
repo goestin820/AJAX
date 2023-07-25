@@ -39,9 +39,14 @@ li:hover{
 </head>
 <body>
     <h1 class="header">XMLHttpRequest</h1>
-    <div class="title"></div>
+    <div class="title">
 
-    <h4></h4>
+    </div>
+
+    <h4>
+
+    </h4>
+
     <ul class="event-list">
 
     </ul>
@@ -68,25 +73,40 @@ li:hover{
 
     //建立得到回應時的各項設定及行為
     xhr.onload=function(){
+        // 下列這2行可省略不寫，沒寫和有寫結果一樣
         //let type=xhr.getResponseHeader("Content-Type")
         //let status=xhr.status
-        let res=xhr.responseText
-        events(res)
+        let res=xhr.responseText;
+
+        // 顯示列印出未解析過的JSON字串
+        console.log('res',res);
+        // 顯示列印出未解析過的JSON，並取得前10個字元
+        // console.log(res.substr(0,10));
+        events(res);
     }
     //送出請求
-    xhr.send()
+    xhr.send();
 
-
+    // 宣告events凾式
     function events(json){
-        let events=JSON.parse(json)
-        //console.log(events)
-        let title=events.title
-        $(".title").text(title)
+        // 使用.parse()來解析JSON字串(JSON都要大寫)，並指派給events變數
+        let events=JSON.parse(json);
+        console.log('events',events);
+        // events顯示結果 {title: '探索活動 - KKTIX', updated: '2023-07-25T23:11:59.730+08:00', entry: Array(100)}
+        console.log('json',json);
+        // json顯示結果和res一樣，都是未解析過的JSON字串
+
+        // 取得events的title欄位，並加入<div class="title">標籤
+        let title=events.title;
+        // console.log('title',title);
+        $(".title").text(title);
         
+        // 取得events的entry欄位(陣列)，並指派給evtry變數
         let entry=events.entry
+        // 使用forEach取出value和key
         entry.forEach((event,idx)=>{
             let content=event.content.split("\n").map((item,idx)=>{return item.split("：")});
-            console.log(content)
+            // console.log('content',content);
 
             let li=`<li>
                         <div class="name">${event.title}</div>
