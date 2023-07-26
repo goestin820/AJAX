@@ -72,7 +72,9 @@ li:hover{
     //建立請求的各項設定及實質內容
     xhr.open(
         'get',
-        'https://kktix.com/events.json'
+        // 'https://kktix.com/events.json'
+        'https://pbi.afa.gov.tw/AFABI_Open/PDIS/GetForecastProduct/?querytime=1690350944011'
+        // 'https://api.twitch.tv/helix/channels/followers'
     )
 
     //建立得到回應時的各項設定及行為
@@ -95,9 +97,9 @@ li:hover{
     function events(json){
         // 使用.parse()來解析JSON字串(JSON都要大寫)，並指派給events變數
         let events=JSON.parse(json);
-        console.log('events',events);
+        // console.log('events',events);
         // events顯示結果 {title: '探索活動 - KKTIX', updated: '2023-07-25T23:11:59.730+08:00', entry: Array(100)}
-        console.log('json',json);
+        // console.log('json',json);
         // json顯示結果和res一樣，都是未解析過的JSON字串
 
         // 取得events的title欄位，並加入<div class="title">標籤
@@ -110,7 +112,7 @@ li:hover{
         // 使用forEach取出evtry的value和key值
         entry.forEach((event,idx)=>{
             let content=event.content.split("\n").map((item,idx)=>{return item.split("：")});
-            console.log('content',content);
+            // console.log('content',content);
 
             let li=`<li>
                         <div class="name">${event.title}</div>
