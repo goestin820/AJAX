@@ -44,7 +44,7 @@ li:hover{
     </div>
 
     <h4>
-
+z
     </h4>
 
     <ul class="event-list">
@@ -97,7 +97,7 @@ li:hover{
         let events=JSON.parse(json);
         console.log('events',events);
         // events顯示結果 {title: '探索活動 - KKTIX', updated: '2023-07-25T23:11:59.730+08:00', entry: Array(100)}
-        console.log('json',json);
+        // console.log('json',json);
         // json顯示結果和res一樣，都是未解析過的JSON字串
 
         // 取得events的title欄位，並加入<div class="title">標籤
@@ -109,12 +109,20 @@ li:hover{
         let entry=events.entry
         // 使用forEach取出evtry的value和key值
         entry.forEach((event,idx)=>{
+            console.log('event.title',event.title);
+            // 【免費講座】交友心法大解密
+            console.log('event.content',event.content);
+            // 時間：2023/07/06 19:00(+0800) ~ 2023/07/27 19:00(+0800)
+            // 地點：純青社會福利基金會 / 台北市松山區光復北路190巷35號2樓
+
             let content=event.content.split("\n").map((item,idx)=>{return item.split("：")});
             console.log('content',content);
+            console.log('idx',idx);
+            // console.log('item',item);
 
             let li=`<li>
                         <div class="name">${event.title}</div>
-                        <div class="content">${content[0][1]}</div>
+                        <div class="content">${content[0][1]}</div> 
                         <div class="content">${content[1][1]}</div>
                     </li>`;
             // $(".event-list").append(li);
